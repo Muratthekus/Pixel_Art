@@ -14,9 +14,9 @@ def runner(PATH):
 
 def image_crop(image):
     width, height = image.size
-    while width % 120 != 0:  # 10 pixel for color, 2 pixel for divider
+    while width % 25 != 0:  # 10 pixel for color, 2 pixel for divider
         width -= 1
-    while height % 150 != 0:  # 10 pixel for color, 5 pixel for divider
+    while height % 30 != 0:  # 10 pixel for color, 5 pixel for divider
         height -= 1
     image.crop((0, 0, width, height))
     return image
@@ -28,26 +28,27 @@ def pixel_classification(image):
     RED=0
     GREEN=0
     BLUE=0
-    for i in range(0,width,120):
-        for j in range(0,height,150):
+    for i in range(0,width,25):
+        for j in range(0,height,30):
 
-            for p in range(100):
-                for k in range(100):
+            for p in range(25):
+                for k in range(30):
                     try:
                         RED += pixel[i + p, j + k][0]
                         GREEN += pixel[i + p, j + k][1]
                         BLUE += pixel[i + p, j + k][2]
-
-                        for divide1 in range(2):
-                            for divide2 in range(5):
-                                try:
-                                    pixel[i + p + divide1, j + k + divide2] = (255, 255, 255)
-                                except IndexError:
-                                    pass
-                        # rewrite pixel value
-                        pixel[i + p, j + k] = (RED // 10000, GREEN // 10000, BLUE // 10000)
                     except IndexError:
                         pass
+            for p in range(25):
+                for k in range(30):
+                    try:
+                        pixel[i + p, j + k] = (RED // 750, GREEN // 750, BLUE // 750)
+                    except IndexError:
+                        pass
+            RED = 0
+            GREEN = 0
+            BLUE = 0
+
 
     rewrite_image(image)
 
