@@ -14,9 +14,9 @@ def runner(PATH):
 
 def image_crop(image):
     width, height = image.size
-    while width % 25 != 0:  # 10 pixel for color, 2 pixel for divider
+    while width % 25 != 0:
         width -= 1
-    while height % 30 != 0:  # 10 pixel for color, 5 pixel for divider
+    while height % 30 != 0:
         height -= 1
     image.crop((0, 0, width, height))
     return image
